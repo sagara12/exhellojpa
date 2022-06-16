@@ -24,12 +24,16 @@ public class JpaMain {
 
             em.persist(member);*/
 
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
+           /* List<Member> result = em.createQuery("select m from Member as m", Member.class)
                     .getResultList();
             for (Member member: result) {
                 System.out.println("member.getName() = " + member.getName());
             }
-            
+            */
+
+            Member member = em.find(Member.class, 150l);
+            member.setName("Update");
+
             tx.commit();
         }catch (Exception e){
             tx.rollback();
