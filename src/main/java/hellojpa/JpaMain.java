@@ -35,8 +35,17 @@ public class JpaMain {
             member.setName("Update");
             */
 
-            Member member = new Member(200l, "member200");
-            em.persist(member);
+            /*Member member = new Member(200l, "member200");
+            em.persist(member);*/
+
+            //영속
+            Member member = new Member(150l, "member200");
+            member.setName("AAAAAAA");
+
+            //비영속
+            //em.detach(member);
+            em.clear();
+            em.close();
 
             em.flush();
             System.out.println("==================================================" );
