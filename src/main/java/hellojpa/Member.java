@@ -1,27 +1,38 @@
 package hellojpa;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
+@SequenceGenerator(name = "member_seq_generator", sequenceName = "member_seq")
 //@Table(name = "MBR") 테이블이름이 다를 때
 public class Member {
 
-    public Member() {
-
-    }
-
-    public Member(Long id, String name) {
-        this.id = id;
-        this.name = name;
-
-    }
-
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_seq_generator")
     private Long id;
-    private String name;
-    private int go;
+
+    @Column(name = "name")
+    private String username;
+/*
+    private Integer age;
+
+    @Enumerated(EnumType.STRING)
+    private RoleType roleType;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastModifiedDate;
+
+    @Lob
+    private String description;
+    //Getter, Setter…*/
+
+    public Member () {
+
+    }
 
     public Long getId() {
         return id;
@@ -31,11 +42,11 @@ public class Member {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

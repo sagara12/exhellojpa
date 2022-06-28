@@ -38,17 +38,22 @@ public class JpaMain {
             /*Member member = new Member(200l, "member200");
             em.persist(member);*/
 
-            //영속
+           /* //영속
             Member member = new Member(150l, "member200");
             member.setName("AAAAAAA");
-
-            //비영속
-            //em.detach(member);
+*/
+            /*비영속
+            em.detach(member);
             em.clear();
             em.close();
 
             em.flush();
-            System.out.println("==================================================" );
+            System.out.println("==================================================" );*/
+            Member member = new Member();
+            member.setUsername("C");
+
+            em.persist(member);
+
             tx.commit();
         }catch (Exception e){
             tx.rollback();
