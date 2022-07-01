@@ -65,7 +65,7 @@ public class JpaMain {
             member.setTeam(team);
             em.persist(member);
 
-            //team.getMembers().add(member);
+            //team.getMembers().add(member); Member에 세팅!
 
             em.flush();
             em.clear();
