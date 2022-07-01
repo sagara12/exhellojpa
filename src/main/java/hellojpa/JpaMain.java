@@ -53,21 +53,24 @@ public class JpaMain {
             member.setUsername("C");
 
             em.persist(member);*/
+
             //저장
             Team team = new Team();
             team.setName("TeamA");
+            //team.getMembers().add(member); 연관관계 주인에다 넣어야됨
             em.persist(team);
-
-            em.flush();
-            em.clear();
 
             Member member = new Member();
             member.setName("member1");
             member.setTeam(team);
-
             em.persist(member);
 
-            Member findMember = em.find(Member.class, member.getId());
+            //team.getMembers().add(member);
+
+            em.flush();
+            em.clear();
+
+            /*Member findMember = em.find(Member.class, member.getId());
             List<Member> members = findMember.getTeam().getMembers();
             
             for (Member m : members) {
@@ -77,7 +80,7 @@ public class JpaMain {
             //
             Team newTeam = em.find(Team.class, 100L);
             findMember.setTeam(newTeam);
-
+*/
             tx.commit();
         }catch (Exception e){
             tx.rollback();
