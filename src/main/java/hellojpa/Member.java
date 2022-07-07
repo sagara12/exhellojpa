@@ -20,6 +20,18 @@ public class Member {
     //@JoinColumn(name = "TEAM_ID",insertable = false, updatable = false) 일대다를 양방향으로 만들때 사용 -> 읽기 전용으로 만듬
     private Team team;
 
+    @OneToOne
+    @JoinColumn(name = "LOCKER_ID")
+    private Locker locker;
+
+    public Locker getLocker() {
+        return locker;
+    }
+
+    public void setLocker(Locker locker) {
+        this.locker = locker;
+    }
+
     public Long getId() {
         return id;
     }
