@@ -17,6 +17,7 @@ public class Member {
 
     @ManyToOne
     @JoinColumn(name = "TEAM_ID")
+    //@JoinColumn(name = "TEAM_ID",insertable = false, updatable = false) 일대다를 양방향으로 만들때 사용 -> 읽기 전용으로 만듬
     private Team team;
 
     public Long getId() {
