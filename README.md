@@ -23,6 +23,9 @@
 # Technologies
 <img src="https://img.shields.io/badge/JPA-orange"/> <img src="https://img.shields.io/badge/H2 DB-blue"/>
 
+# IDEA
+<img src="https://img.shields.io/badge/IntelliJ IDEA-6A5FBB?style=flat-square&logo=IntelliJ IDEA&logoColor=white"/>
+
 # 기타
 > 왜 이 강의를 수강 했는가?
 * 과거에는 국내 사람들은 JPA가 생소한 기술이라 많은 사람들이 쓰지 않았지만 예전부터 외국에서는 Ibatis, MyBatis를 넘어선 이용률을 보여주고 있었습니다. 
