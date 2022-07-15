@@ -18,7 +18,7 @@ public class Member extends BaseEntity{
    /* @Column(name = "TEAM_ID")
     private Long teamId;*/
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_ID")
     //@JoinColumn(name = "TEAM_ID",insertable = false, updatable = false) 일대다를 양방향으로 만들때 사용 -> 읽기 전용으로 만듬
     private Team team;

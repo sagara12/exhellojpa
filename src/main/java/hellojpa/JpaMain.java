@@ -17,31 +17,36 @@ public class JpaMain {
         tx.begin();
         try {
             
-            Member member1 = new Member();
+          /*  Member member1 = new Member();
             member1.setName("member1");
             em.persist(member1);
 
-            /*Member member2 = new Member();
+            *//*Member member2 = new Member();
             member2.setName("member2");
-            em.persist(member2);*/
+            em.persist(member2);*//*
+
+            Team team = new Team();
+            team.setName("teamA");
+            member1.setTeam(team);
+            em.persist(team);
 
             em.flush();
             em.clear();
 
             Member m1 = em.find(Member.class, member1.getId());
-           /* Member m2 = em.getReference(Member.class, member1.getId());*/
+           *//* Member m2 = em.getReference(Member.class, member1.getId());*//*
 
             System.out.println("m1 == m2 " + (m1 instanceof Member));
             System.out.println("m1.getClass() = " + m1.getClass());
 
              Member reference = em.getReference(Member.class, m1.getId());
             System.out.println("reference = " + reference.getClass());
-           /* System.out.println("m1 == m2 " + (m2 instanceof Member));*/
+           *//* System.out.println("m1 == m2 " + (m2 instanceof Member));*//*
 
             System.out.println("a == a " +  (m1 == reference));
 
 //            Member findmember = em.find(Member.class, member.getId());
-            Member findMemeber = em.getReference(Member.class, member1.getId());
+            Member findMemeber = em.find(Member.class, member1.getId());
             //프록시 인스턴스 초기화 여부 확인
             System.out.println("emf.getPersistenceUnitUtil().isLoaded(findMemeber) = " + emf.getPersistenceUnitUtil().isLoaded(findMemeber));
             //프록시 강제 초기화
@@ -49,11 +54,23 @@ public class JpaMain {
 
             System.out.println("findMemeber.getClass() = " + findMemeber.getClass());
             System.out.println("findmember.getId() = " + findMemeber.getId());
-            System.out.println("findmember = " + findMemeber.getName());
+            System.out.println("findmember = " + findMemeber.getName());*/
+
+            Child child1 = new Child();
+            Child child2 = new Child();
+
+            Parent parent  = new Parent();
+            parent.adChild(child1);
+            parent.adChild(child2);
+
+            em.persist(parent);
+
+            em.flush();
+            em.clear();
 
 
-
-
+            Parent findParent = em.find(Parent.class, parent.getId());
+            findParent.getChildList().remove(0);
             tx.commit();
         }catch (Exception e){
             tx.rollback();
