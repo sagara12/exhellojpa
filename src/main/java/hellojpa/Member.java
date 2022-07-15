@@ -66,4 +66,12 @@ public class Member extends BaseEntity{
         this.team = team;
         team.getMembers().add(this);
     }
+
+    public List<MemberProduct> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<MemberProduct> products) {
+        this.products = products;
+    }
 }
