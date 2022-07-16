@@ -56,7 +56,7 @@ public class JpaMain {
             System.out.println("findmember.getId() = " + findMemeber.getId());
             System.out.println("findmember = " + findMemeber.getName());*/
 
-            Child child1 = new Child();
+            /*Child child1 = new Child();
             Child child2 = new Child();
 
             Parent parent  = new Parent();
@@ -71,7 +71,16 @@ public class JpaMain {
 
             Parent findParent = em.find(Parent.class, parent.getId());
             findParent.getChildList().remove(0);
+            tx.commit();*/
+
+            Member member = new Member();
+            member.setName("JJP");
+            member.setHomeAddress(new Address("city1", "street1","0"));
+            member.setWorkPeriod(new Period());
+
+            em.persist(member);
             tx.commit();
+
         }catch (Exception e){
             tx.rollback();
         }finally {
