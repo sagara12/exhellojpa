@@ -5,6 +5,7 @@ import org.hibernate.Hibernate;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 public class JpaMain {
 
@@ -73,14 +74,50 @@ public class JpaMain {
             findParent.getChildList().remove(0);
             tx.commit();*/
 
-            Member member = new Member();
-            member.setName("JJP");
+            /*Member member = new Member();
+            member.setName("KKD");
             member.setHomeAddress(new Address("city1", "street1","0"));
             member.setWorkPeriod(new Period());
 
             em.persist(member);
-            tx.commit();
+            tx.commit();*/
 
+            Member member = new Member();
+            member.setName("member1");
+            member.setHomeAddress(new Address("Homecity1", "street1","zipcode1"));
+            member.getFavoriteFoods().add("치킨");
+            member.getFavoriteFoods().add("피자");
+            member.getFavoriteFoods().add("족발");
+
+            member.getAddressHistory().add(new AddressEntity("old2", "street1","zipcode1"));
+            member.getAddressHistory().add(new AddressEntity("old1", "street1","zipcode1"));
+            em.persist(member);
+
+            em.flush();
+            em.clear();
+
+            System.out.println("=======================start ==================================== ");
+            Member findMember = em.find(Member.class, member.getId());
+           /*
+            List<Address> addressHistory = findMember.getAddressHistory();
+            for (Address address : addressHistory) {
+                System.out.println("address.getCity() = " + address.getCity());
+            }
+
+            Set<String> favoriteFoods = findMember.getFavoriteFoods();
+            for (String favoriteFood : favoriteFoods) {
+                System.out.println("favoriteFood = " + favoriteFood);
+            }*/
+           /* Address a = findMember.getHomeAddress();
+            findMember.setHomeAddress(new Address("new City", a.getStreet(), a.getZipcode()));
+            //치킨 -> 한식
+            findMember.getFavoriteFoods().remove("치킨");
+            findMember.getFavoriteFoods().add("한식");
+
+            findMember.getAddressHistory().remove(new AddressEntity("old1", "street1","zipcode1"));
+            findMember.getAddressHistory().remove(new AddressEntity("newCity1", "street1","zipcode1"));*/
+
+            tx.commit();
         }catch (Exception e){
             tx.rollback();
         }finally {
