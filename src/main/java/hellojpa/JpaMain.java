@@ -3,6 +3,9 @@ package hellojpa;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
@@ -17,7 +20,33 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
-            
+
+            Member member =  new Member();
+            member.setName("member1");
+            em.persist(member);
+
+            //flush -> commit, query
+
+            em.createNativeQuery("select MEMBER_ID, city, street, zipcode, USERNAME form MEMBER").getResultList();
+
+          /*   List<Member> result = em.createQuery(
+                    "select m From Member m where m.name like '%kim%'", Member.class
+            ).getResultList();
+
+            for (Member member : result) {
+                System.out.println("member = " + member);
+            }*/
+
+            //Criteria 는 쿼리가 너무 복잡에서 실무에서 사용 X
+            /*CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Member> query = cb.createQuery(Member.class);
+
+            Root<Member> m = query.from(Member.class);
+            CriteriaQuery<Member> cq = query.select(m).where(cb.equal(m.get("name"), "kim" ));
+            List<Member> resultList = em.createQuery(cq).getResultList();*/
+
+            tx.commit();
+
           /*  Member member1 = new Member();
             member1.setName("member1");
             em.persist(member1);
@@ -82,7 +111,7 @@ public class JpaMain {
             em.persist(member);
             tx.commit();*/
 
-            Member member = new Member();
+            /*Member member = new Member();
             member.setName("member1");
             member.setHomeAddress(new Address("Homecity1", "street1","zipcode1"));
             member.getFavoriteFoods().add("치킨");
@@ -94,10 +123,10 @@ public class JpaMain {
             em.persist(member);
 
             em.flush();
-            em.clear();
-
+            em.clear();*/
+/*
             System.out.println("=======================start ==================================== ");
-            Member findMember = em.find(Member.class, member.getId());
+            Member findMember = em.find(Member.class, member.getId());*/
            /*
             List<Address> addressHistory = findMember.getAddressHistory();
             for (Address address : addressHistory) {
@@ -117,7 +146,7 @@ public class JpaMain {
             findMember.getAddressHistory().remove(new AddressEntity("old1", "street1","zipcode1"));
             findMember.getAddressHistory().remove(new AddressEntity("newCity1", "street1","zipcode1"));*/
 
-            tx.commit();
+
         }catch (Exception e){
             tx.rollback();
         }finally {
