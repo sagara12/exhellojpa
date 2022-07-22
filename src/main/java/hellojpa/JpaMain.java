@@ -19,22 +19,39 @@ public class JpaMain {
 
         EntityTransaction tx = em.getTransaction();
         tx.begin();
+
         try {
 
-            Member member =  new Member();
-            member.setName("member1");
-            em.persist(member);
+            Member member1 = new Member();
+            member1.setName("member1");
+            em.persist(member1);
 
+            Member member2 = new Member();
+            member2.setName("member2");
+            em.persist(member2);
+
+            Team team = new Team();
+            team.setName("teamA");
+            member1.setTeam(team);
+            em.persist(team);
+
+            em.flush();
+            em.clear();
             //flush -> commit, query
 
-            String query = "select t From Team t ";
-
-            List<Team> result = em.createQuery(query, Team.class)
-                    .setFirstResult(0)
-                    .setMaxResults(2)
+            List<Member> resultList = em.createNamedQuery("Member.findByUserName", Member.class)
+                    .setParameter("name", "member1")
                     .getResultList();
+            /*String query = "select m from Member m where m = :member";
 
-            System.out.println("result = " + result.size());
+            Member findMember = em.createQuery(query, Member.class)
+                    .setParameter("memeber", member1)
+                            .getSingleResult();*/
+
+            for (Member member : resultList) {
+                System.out.println("member = " + member);
+            }
+            tx.commit();
             //em.createNativeQuery("select MEMBER_ID, city, street, zipcode, USERNAME form MEMBER").getResultList();
 
 
@@ -54,7 +71,7 @@ public class JpaMain {
             CriteriaQuery<Member> cq = query.select(m).where(cb.equal(m.get("name"), "kim" ));
             List<Member> resultList = em.createQuery(cq).getResultList();*/
 
-            tx.commit();
+
 
           /*  Member member1 = new Member();
             member1.setName("member1");

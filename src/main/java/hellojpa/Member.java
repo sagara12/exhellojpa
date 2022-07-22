@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 @Entity
+@NamedQuery(name = "Member.findByUserName",
+            query = "select m from Member m where m.name = :name"
+)
 public class Member extends BaseEntity{
     @Id @GeneratedValue
     @Column(name = "MEMBER_ID")
