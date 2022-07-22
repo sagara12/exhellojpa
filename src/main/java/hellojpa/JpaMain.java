@@ -27,7 +27,16 @@ public class JpaMain {
 
             //flush -> commit, query
 
-            em.createNativeQuery("select MEMBER_ID, city, street, zipcode, USERNAME form MEMBER").getResultList();
+            String query = "select t From Team t ";
+
+            List<Team> result = em.createQuery(query, Team.class)
+                    .setFirstResult(0)
+                    .setMaxResults(2)
+                    .getResultList();
+
+            System.out.println("result = " + result.size());
+            //em.createNativeQuery("select MEMBER_ID, city, street, zipcode, USERNAME form MEMBER").getResultList();
+
 
           /*   List<Member> result = em.createQuery(
                     "select m From Member m where m.name like '%kim%'", Member.class
