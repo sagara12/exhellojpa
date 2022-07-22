@@ -16,6 +16,9 @@ public class Member extends BaseEntity{
     @Column(name = "USERNAME")
     private String name;
 
+    @Column(name = "AGE")
+    private int age;
+
    /* @Column(name = "TEAM_ID")
     private Long teamId;*/
 
@@ -142,6 +145,14 @@ public class Member extends BaseEntity{
     public void setAddressHistory(List<Address> addressHistory) {
         this.addressHistory = addressHistory;
     }*/
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 
     public Address getWorkAddress() {
         return workAddress;
